@@ -11,10 +11,12 @@ module.exports = {
       'error',
       {
         singleQuote: true,
+        endOfLine: 'auto',
       },
     ],
     'vue/component-name-in-template-casing': ['error', 'kebab-case'],
     'vue/custom-event-name-casing': ['warn'],
+    'no-unused-vars': [0, { vars: 'local', args: 'none' }],
   },
   parserOptions: {
     parser: 'babel-eslint',
