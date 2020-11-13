@@ -14,6 +14,7 @@ import NetworkSettingStore from './modules/Configuration/NetworkSettingsStore';
 import EventLogStore from './modules/Health/EventLogStore';
 import SensorsStore from './modules/Health/SensorsStore';
 import ServerLedStore from './modules/Control/ServerLedStore';
+import RegistersStore  from './modules/Control/RegistersStore';
 import SystemStore from './modules/Health/SystemStore';
 import PowerSupplyStore from './modules/Health/PowerSupplyStore';
 import MemoryStore from './modules/Health/MemoryStore';
@@ -48,6 +49,7 @@ export default new Vuex.Store({
     sensors: SensorsStore,
     sslCertificates: SslCertificatesStore,
     serverLed: ServerLedStore,
+    registers: RegistersStore,
     system: SystemStore,
     memory: MemoryStore,
     fan: FanStore,

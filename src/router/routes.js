@@ -21,6 +21,7 @@ import Sensors from '@/views/Health/Sensors';
 import SerialOverLan from '@/views/Control/SerialOverLan';
 import SerialOverLanConsole from '@/views/Control/SerialOverLan/SerialOverLanConsole';
 import ServerLed from '@/views/Control/ServerLed';
+import Registers from '@/views/Control/Registers';
 import ServerPowerOperations from '@/views/Control/ServerPowerOperations';
 import SslCertificates from '@/views/AccessControl/SslCertificates';
 import VirtualMedia from '@/views/Control/VirtualMedia';
@@ -200,6 +201,14 @@ const routes = [
         component: ServerLed,
         meta: {
           title: i18n.t('appPageTitle.serverLed'),
+        },
+      },
+      {
+        path: '/control/registers',
+        name: 'registers',
+        component: Registers,
+        meta: {
+          title: i18n.t('appPageTitle.registers'),
         },
       },
       {

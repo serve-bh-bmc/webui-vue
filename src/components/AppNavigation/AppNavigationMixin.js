@@ -76,6 +76,11 @@ const AppNavigationMixin = {
               route: '/control/server-led',
             },
             {
+              id: 'registers',
+              label: this.$t('appNavigation.registers'),
+              route: '/control/registers',
+            },
+            {
               id: 'server-power-operations',
               label: this.$t('appNavigation.serverPowerOperations'),
               route: '/control/server-power-operations',
