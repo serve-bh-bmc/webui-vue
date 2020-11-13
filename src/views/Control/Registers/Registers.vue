@@ -1,27 +1,27 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <div v-for="register in registers" :key="register.name">
-      <b-row>
-        <!-- <h2>{{ register.name }}</h2> -->
-        <b-col md="12">
-          <!-- <page-section :section-title="register.name"> -->
-          <b-form-group :label="register.name" 
+    <b-row>
+      <!-- <h2>{{ register.name }}</h2> -->
+      <b-col md="12">
+        <page-section :section-title="testRegisterTitle">
+          <b-form-group
+            v-for="register in registers"
+            :key="register.name"
+            :label="register.name"
             label-cols-sm="4"
             label-cols-lg="3"
-            label-for="input-horizontal"
           >
             <b-form-checkbox
-              id="input-horizontal"
               v-model="register.value"
-              data-test-id="serverLed-checkbox-switchIndicatorLed"
+              data-test-id="register-checkbox-swithRegisterValue"
               name="check-button"
               value="On"
               unchecked-value="Off"
               switch
-              @change="changeRegisterValue"
+              @change="changeRegisterValue(register.name, register.value)"
             >
-              <span v-if="register.name && register.value !== 'off'">
+              <span v-if="register.name && register.value !== 'Off'">
                 {{ $t("global.status.on") }}
               </span>
               <span v-else>
@@ -29,10 +29,9 @@
               </span>
             </b-form-checkbox>
           </b-form-group>
-          <!-- </page-section> -->
-        </b-col>
-      </b-row>
-    </div>
+        </page-section>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -56,6 +55,9 @@ export default {
       get() {
         return this.$store.getters["registers/getRegisters"];
       },
+      set(newRegisters) {
+        return newRegisters;
+      },
     },
     // indicatorLed: {
     //   get() {
@@ -73,17 +75,20 @@ export default {
       .finally(() => this.endLoader());
   },
   methods: {
-    changeRegisterValue(indicatorLed) {
+    changeRegisterValue(name, oldRegisterValue) {
+      var newRegisterValue = "On";
+      if (oldRegisterValue === "On") {
+        newRegisterValue = "Off";
+      }
+      console.log(this.registers);
+      var obj = {};
+      obj.name = name;
+      obj.payload = newRegisterValue;
       this.$store
-        .dispatch("serverLed/saveIndicatorLedValue", indicatorLed)
+        .dispatch("registers/saveRegisterValue", obj)
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
           this.errorToast(message);
-          if (indicatorLed === "Off") {
-            this.indicatorLed === "Lit";
-          } else {
-            this.indicatorLed === "Off";
-          }
         });
     },
   },

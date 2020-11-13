@@ -7,17 +7,11 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        endOfLine: 'auto',
-      },
-    ],
+    'prettier/prettier': 0,
     'vue/component-name-in-template-casing': ['error', 'kebab-case'],
     'vue/custom-event-name-casing': ['warn'],
     'no-unused-vars': [0, { vars: 'local', args: 'none' }],
-    'quotes': 0,
+    'quotes': [0, "double"],
   },
   parserOptions: {
     parser: 'babel-eslint',

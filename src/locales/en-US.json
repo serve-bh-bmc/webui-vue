@@ -576,6 +576,16 @@
       "successServerLedOn": "Server LED successfully turned on."
     }
   },
+  "pageRegister": {
+    "registerSubTitle": "Register value",
+    "registerTitle": "Register control",
+    "toast": {
+      "errorRegisterOff": "Error turning Register off.",
+      "errorRegisterOn": "Error turning Register on.",
+      "successRegisterOff": "Register successfully turned off.",
+      "successRegisterOn": "Register successfully turned on."
+    }
+  },
   "pageServerPowerOperations": {
     "currentStatus": "Current status",
     "hostOsBootSettings": "Host OS boot settings",

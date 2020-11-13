@@ -1,26 +1,26 @@
-import api from "@/store/api";
-import i18n from "@/i18n";
+import api from "@/store/api"
+import i18n from "@/i18n"
 
 const RegistersStore = {
   namespaced: true,
   state: {
     registers: [
-      { name: "A0", value: "off" },
-      { name: "A1", value: "off" },
-      { name: "A2", value: "off" },
-      { name: "A3", value: "off" },
-      { name: "A4", value: "off" },
-      { name: "A5", value: "off" },
-      { name: "A6", value: "off" },
-      { name: "A7", value: "off" },
-      { name: "A8", value: "off" },
-      { name: "A9", value: "off" },
-      { name: "A10", value: "off" },
-      { name: "A11", value: "off" },
-      { name: "A12", value: "off" },
-      { name: "A13", value: "off" },
-      { name: "A14", value: "off" },
-      { name: "A15", value: "off" },
+      { name: "A0", value: "Off" },
+      { name: "A1", value: "Off" },
+      { name: "A2", value: "Off" },
+      { name: "A3", value: "Off" },
+      { name: "A4", value: "Off" },
+      { name: "A5", value: "Off" },
+      { name: "A6", value: "Off" },
+      { name: "A7", value: "Off" },
+      { name: "A8", value: "Off" },
+      { name: "A9", value: "Off" },
+      { name: "A10", value: "Off" },
+      { name: "A11", value: "Off" },
+      { name: "A12", value: "Off" },
+      { name: "A13", value: "Off" },
+      { name: "A14", value: "Off" },
+      { name: "A15", value: "Off" },
     ],
   },
   getters: {
@@ -28,7 +28,14 @@ const RegistersStore = {
   },
   mutations: {
     setRegisterValue(state, name, newValue) {
-      state.registers[name] = newValue;
+      for (var i = 0; i < 16; i++) {
+        if (state.registers[i].name == name) {
+          state.registers[i].value = newValue
+        }
+      }
+    },
+    setRegistersValue(state, registers) {
+      state.registers = registers
     },
   },
   actions: {
@@ -36,31 +43,36 @@ const RegistersStore = {
       return await api
         .get("/redfish/v1/Systems/system")
         .then((response) => {
-          commit("setRegisterValue", response.data.name, response.data.IndicatorLED);
+          commit("setRegistersValue", response.data.registers)
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     },
-    async saveIndicatorLedValue({ commit }, payload) {
+    async saveRegisterValue({ commit }, obj) {
+      var name = obj.name;
+      var payload = obj.payload;
       return await api
-        .patch("/redfish/v1/Systems/system", { IndicatorLED: payload })
+        .patch("/redfish/v1/Systems/system", {
+          Name: name,
+          RegisterValue: payload,
+        })
         .then(() => {
-          commit("setIndicatorValue", payload);
-          if (payload === "Lit") {
-            return i18n.t("pageServerLed.toast.successServerLedOn");
+          commit("setRegisterValue", name, payload)
+          if (payload === "On") {
+            return i18n.t("pageRegisters.toast.successReigsterOn")
           } else {
-            return i18n.t("pageServerLed.toast.successServerLedOff");
+            return i18n.t("pageRegisters.toast.successRegisterOff")
           }
         })
         .catch((error) => {
-          console.log(error);
-          if (payload === "Lit") {
-            throw new Error(i18n.t("pageServerLed.toast.errorServerLedOn"));
+          console.log(error)
+          if (payload === "On") {
+            throw new Error(i18n.t("pageRegister.toast.errorRegisterOn"))
           } else {
-            throw new Error(i18n.t("pageServerLed.toast.errorServerLedOff"));
+            throw new Error(i18n.t("pageRegister.toast.errorRegisterOff"))
           }
-        });
+        })
     },
   },
-};
+}
 
-export default RegistersStore;
+export default RegistersStore
