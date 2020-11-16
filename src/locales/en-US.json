@@ -111,7 +111,7 @@
     "sensors": "@:appPageTitle.sensors",
     "serialOverLan": "SOL console",
     "serverLed": "@:appPageTitle.serverLed",
-    "registers": "@:appPageTitle.registers",
+    "nfcards": "@:appPageTitle.nfcards",
     "serverPowerOperations": "@:appPageTitle.serverPowerOperations",
     "snmpSettings": "@:appPageTitle.snmpSettings",
     "sslCertificates": "@:appPageTitle.sslCertificates",
@@ -136,7 +136,7 @@
     "sensors": "Sensors",
     "serialOverLan": "Serial over LAN (SOL) console",
     "serverLed": "Server LED",
-    "registers": "Registers",
+    "nfcards": "NFCards",
     "serverPowerOperations": "Server power operations",
     "snmpSettings": "SNMP settings",
     "sslCertificates": "SSL certificates",
@@ -576,14 +576,14 @@
       "successServerLedOn": "Server LED successfully turned on."
     }
   },
-  "pageRegister": {
-    "registerSubTitle": "Register value",
-    "registerTitle": "Register control",
+  "pageNFCard": {
+    "nfcardSubTitle": "NFCard value",
+    "nfcardTitle": "NFCard control",
     "toast": {
-      "errorRegisterOff": "Error turning Register off.",
-      "errorRegisterOn": "Error turning Register on.",
-      "successRegisterOff": "Register successfully turned off.",
-      "successRegisterOn": "Register successfully turned on."
+      "errorNFCardOff": "Error turning NFCard off.",
+      "errorNFCardOn": "Error turning NFCard on.",
+      "successNFCardOff": "NFCard successfully turned off.",
+      "successNFCardOn": "NFCard successfully turned on."
     }
   },
   "pageServerPowerOperations": {

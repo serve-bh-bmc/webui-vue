@@ -1,9 +1,9 @@
-import IconAnalytics from '@carbon/icons-vue/es/analytics/16';
-import IconDataCheck from '@carbon/icons-vue/es/data--check/16';
-import IconSettingsAdjust from '@carbon/icons-vue/es/settings--adjust/16';
-import IconSettings from '@carbon/icons-vue/es/settings/16';
-import IconPassword from '@carbon/icons-vue/es/password/16';
-import IconChevronUp from '@carbon/icons-vue/es/chevron--up/16';
+import IconAnalytics from "@carbon/icons-vue/es/analytics/16";
+import IconDataCheck from "@carbon/icons-vue/es/data--check/16";
+import IconSettingsAdjust from "@carbon/icons-vue/es/settings--adjust/16";
+import IconSettings from "@carbon/icons-vue/es/settings/16";
+import IconPassword from "@carbon/icons-vue/es/password/16";
+import IconChevronUp from "@carbon/icons-vue/es/chevron--up/16";
 
 const AppNavigationMixin = {
   components: {
@@ -18,126 +18,126 @@ const AppNavigationMixin = {
     return {
       navigationItems: [
         {
-          id: 'overview',
-          label: this.$t('appNavigation.overview'),
-          route: '/',
-          icon: 'iconOverview',
+          id: "overview",
+          label: this.$t("appNavigation.overview"),
+          route: "/",
+          icon: "iconOverview",
         },
         {
-          id: 'health',
-          label: this.$t('appNavigation.health'),
-          icon: 'iconHealth',
+          id: "health",
+          label: this.$t("appNavigation.health"),
+          icon: "iconHealth",
           children: [
             {
-              id: 'event-logs',
-              label: this.$t('appNavigation.eventLogs'),
-              route: '/health/event-logs',
+              id: "event-logs",
+              label: this.$t("appNavigation.eventLogs"),
+              route: "/health/event-logs",
             },
             {
-              id: 'hardware-status',
-              label: this.$t('appNavigation.hardwareStatus'),
-              route: '/health/hardware-status',
+              id: "hardware-status",
+              label: this.$t("appNavigation.hardwareStatus"),
+              route: "/health/hardware-status",
             },
             {
-              id: 'sensors',
-              label: this.$t('appNavigation.sensors'),
-              route: '/health/sensors',
+              id: "sensors",
+              label: this.$t("appNavigation.sensors"),
+              route: "/health/sensors",
             },
           ],
         },
         {
-          id: 'control',
-          label: this.$t('appNavigation.control'),
-          icon: 'iconControl',
+          id: "control",
+          label: this.$t("appNavigation.control"),
+          icon: "iconControl",
           children: [
             {
-              id: 'kvm',
-              label: this.$t('appNavigation.kvm'),
-              route: '/control/kvm',
+              id: "kvm",
+              label: this.$t("appNavigation.kvm"),
+              route: "/control/kvm",
             },
             {
-              id: 'manage-power-usage',
-              label: this.$t('appNavigation.managePowerUsage'),
-              route: '/control/manage-power-usage',
+              id: "manage-power-usage",
+              label: this.$t("appNavigation.managePowerUsage"),
+              route: "/control/manage-power-usage",
             },
             {
-              id: 'reboot-bmc',
-              label: this.$t('appNavigation.rebootBmc'),
-              route: '/control/reboot-bmc',
+              id: "reboot-bmc",
+              label: this.$t("appNavigation.rebootBmc"),
+              route: "/control/reboot-bmc",
             },
             {
-              id: 'serial-over-lan',
-              label: this.$t('appNavigation.serialOverLan'),
-              route: '/control/serial-over-lan',
+              id: "serial-over-lan",
+              label: this.$t("appNavigation.serialOverLan"),
+              route: "/control/serial-over-lan",
             },
             {
-              id: 'server-led',
-              label: this.$t('appNavigation.serverLed'),
-              route: '/control/server-led',
+              id: "server-led",
+              label: this.$t("appNavigation.serverLed"),
+              route: "/control/server-led",
             },
             {
-              id: 'registers',
-              label: this.$t('appNavigation.registers'),
-              route: '/control/registers',
+              id: "nfcards",
+              label: this.$t("appNavigation.nfcards"),
+              route: "/control/nfcards",
             },
             {
-              id: 'server-power-operations',
-              label: this.$t('appNavigation.serverPowerOperations'),
-              route: '/control/server-power-operations',
+              id: "server-power-operations",
+              label: this.$t("appNavigation.serverPowerOperations"),
+              route: "/control/server-power-operations",
             },
             {
-              id: 'virtual-media',
-              label: this.$t('appNavigation.virtualMedia'),
-              route: '/control/virtual-media',
+              id: "virtual-media",
+              label: this.$t("appNavigation.virtualMedia"),
+              route: "/control/virtual-media",
             },
           ],
         },
         {
-          id: 'configuration',
-          label: this.$t('appNavigation.configuration'),
-          icon: 'iconConfiguration',
+          id: "configuration",
+          label: this.$t("appNavigation.configuration"),
+          icon: "iconConfiguration",
           children: [
             {
-              id: 'date-time-settings',
-              label: this.$t('appNavigation.dateTimeSettings'),
-              route: '/configuration/date-time-settings',
+              id: "date-time-settings",
+              label: this.$t("appNavigation.dateTimeSettings"),
+              route: "/configuration/date-time-settings",
             },
             {
-              id: 'firmware',
-              label: this.$t('appNavigation.firmware'),
-              route: '/configuration/firmware',
+              id: "firmware",
+              label: this.$t("appNavigation.firmware"),
+              route: "/configuration/firmware",
             },
             {
-              id: 'network-settings',
-              label: this.$t('appNavigation.networkSettings'),
-              route: '/configuration/network-settings',
+              id: "network-settings",
+              label: this.$t("appNavigation.networkSettings"),
+              route: "/configuration/network-settings",
             },
             {
-              id: 'snmp-settings',
-              label: this.$t('appNavigation.snmpSettings'),
-              route: '',
+              id: "snmp-settings",
+              label: this.$t("appNavigation.snmpSettings"),
+              route: "",
             },
           ],
         },
         {
-          id: 'access-control',
-          label: this.$t('appNavigation.accessControl'),
-          icon: 'iconAccessControl',
+          id: "access-control",
+          label: this.$t("appNavigation.accessControl"),
+          icon: "iconAccessControl",
           children: [
             {
-              id: 'ldap',
-              label: this.$t('appNavigation.ldap'),
-              route: '/access-control/ldap',
+              id: "ldap",
+              label: this.$t("appNavigation.ldap"),
+              route: "/access-control/ldap",
             },
             {
-              id: 'local-user-management',
-              label: this.$t('appNavigation.localUserManagement'),
-              route: '/access-control/local-user-management',
+              id: "local-user-management",
+              label: this.$t("appNavigation.localUserManagement"),
+              route: "/access-control/local-user-management",
             },
             {
-              id: 'ssl-certificates',
-              label: this.$t('appNavigation.sslCertificates'),
-              route: '/access-control/ssl-certificates',
+              id: "ssl-certificates",
+              label: this.$t("appNavigation.sslCertificates"),
+              route: "/access-control/ssl-certificates",
             },
           ],
         },
