@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OpenBMC Web UI Style Guide</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Guidance on code style and development for the OpenBMC browser-based UI">
+    
+    <link rel="preload" href="/webui-vue/assets/css/0.styles.bc1b00f6.css" as="style"><link rel="preload" href="/webui-vue/assets/js/app.4445b360.js" as="script"><link rel="preload" href="/webui-vue/assets/js/2.72eb9427.js" as="script"><link rel="preload" href="/webui-vue/assets/js/31.4e89bafe.js" as="script"><link rel="prefetch" href="/webui-vue/assets/js/10.6a384832.js"><link rel="prefetch" href="/webui-vue/assets/js/11.419e5cea.js"><link rel="prefetch" href="/webui-vue/assets/js/12.1d2224ff.js"><link rel="prefetch" href="/webui-vue/assets/js/13.ce0a3e97.js"><link rel="prefetch" href="/webui-vue/assets/js/14.38a92d0b.js"><link rel="prefetch" href="/webui-vue/assets/js/15.346a639f.js"><link rel="prefetch" href="/webui-vue/assets/js/16.d52d2792.js"><link rel="prefetch" href="/webui-vue/assets/js/17.32c879fe.js"><link rel="prefetch" href="/webui-vue/assets/js/18.4e5cd5e9.js"><link rel="prefetch" href="/webui-vue/assets/js/19.b3798336.js"><link rel="prefetch" href="/webui-vue/assets/js/20.c6a4d8aa.js"><link rel="prefetch" href="/webui-vue/assets/js/21.c79f457c.js"><link rel="prefetch" href="/webui-vue/assets/js/22.42fcd135.js"><link rel="prefetch" href="/webui-vue/assets/js/23.9d19a48e.js"><link rel="prefetch" href="/webui-vue/assets/js/24.d9659c7e.js"><link rel="prefetch" href="/webui-vue/assets/js/25.c7d158a1.js"><link rel="prefetch" href="/webui-vue/assets/js/26.a230cc06.js"><link rel="prefetch" href="/webui-vue/assets/js/27.03a3199f.js"><link rel="prefetch" href="/webui-vue/assets/js/28.3d53659d.js"><link rel="prefetch" href="/webui-vue/assets/js/29.0bad31e4.js"><link rel="prefetch" href="/webui-vue/assets/js/3.6e0a7514.js"><link rel="prefetch" href="/webui-vue/assets/js/30.128e9027.js"><link rel="prefetch" href="/webui-vue/assets/js/32.204f5e51.js"><link rel="prefetch" href="/webui-vue/assets/js/33.0d4d0c3c.js"><link rel="prefetch" href="/webui-vue/assets/js/34.c6bac64b.js"><link rel="prefetch" href="/webui-vue/assets/js/4.4b50fa82.js"><link rel="prefetch" href="/webui-vue/assets/js/5.bf175b92.js"><link rel="prefetch" href="/webui-vue/assets/js/6.1c42a2ca.js"><link rel="prefetch" href="/webui-vue/assets/js/7.75e48b50.js"><link rel="prefetch" href="/webui-vue/assets/js/8.a400c6df.js"><link rel="prefetch" href="/webui-vue/assets/js/9.bffd7915.js">
+    <link rel="stylesheet" href="/webui-vue/assets/css/0.styles.bc1b00f6.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/webui-vue/" aria-current="page" class="home-link router-link-exact-active router-link-active"><!----> <span class="site-name">OpenBMC Web UI Style Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/webui-vue/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/webui-vue/themes/" class="nav-link">
+  Themes
+</a></div><div class="nav-item"><a href="https://github.com/openbmc/webui-vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/webui-vue/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/webui-vue/themes/" class="nav-link">
+  Themes
+</a></div><div class="nav-item"><a href="https://github.com/openbmc/webui-vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <!----> </aside> <main aria-labelledby="main-title" class="home"><header class="hero"><img src="openbmc-logo.svg" alt="hero"> <h1 id="main-title">
+      Style Guide and Coding Conventions
+    </h1> <p class="description">
+      Guidance on code style and development for the OpenBMC browser-based UI
+    </p> <p class="action"><a href="/webui-vue/guide/" class="nav-link action-button">
+  Getting Started
+</a></p></header> <!----> <div class="theme-default-content custom content__default"></div> <!----></main></div><div class="global-ui"></div></div>
+    <script src="/webui-vue/assets/js/app.4445b360.js" defer></script><script src="/webui-vue/assets/js/2.72eb9427.js" defer></script><script src="/webui-vue/assets/js/31.4e89bafe.js" defer></script>
+  </body>
+</html>
