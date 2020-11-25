@@ -113,9 +113,15 @@ const AppNavigationMixin = {
               route: "/configuration/network-settings",
             },
             {
+<<<<<<< HEAD
               id: "snmp-settings",
               label: this.$t("appNavigation.snmpSettings"),
               route: "",
+=======
+              id: 'snmp-settings',
+              label: this.$t('appNavigation.snmpSettings'),
+              route: '/snmp-settings',
+>>>>>>> e7eb9dc6c2c1e5969e0bddc23521cd3e11eacb22
             },
           ],
         },

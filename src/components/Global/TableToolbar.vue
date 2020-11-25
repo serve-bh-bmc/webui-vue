@@ -12,7 +12,7 @@
             :data-test-id="`table-button-${action.value}Selected`"
             variant="primary"
             class="d-block"
-            @click="$emit('batchAction', action.value)"
+            @click="$emit('batch-action', action.value)"
           >
             {{ action.label }}
           </b-button>
@@ -20,7 +20,7 @@
           <b-button
             variant="secondary"
             class="d-block"
-            @click="$emit('clearSelected')"
+            @click="$emit('clear-selected')"
           >
             {{ $t('global.action.cancel') }}
           </b-button>
@@ -103,7 +103,8 @@ $toolbar-height: 46px;
 .slide-leave-active {
   transition: transform $duration--moderate-02 $exit-easing--productive;
 }
-.slide-enter,
+.slide-enter, // Remove this vue2 based only class when switching to vue3
+.slide-enter-from, // This is vue3 based only class modified from 'slide-enter'
 .slide-leave-to {
   transform: translateY($toolbar-height);
 }

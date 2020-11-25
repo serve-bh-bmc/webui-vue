@@ -71,11 +71,11 @@ export default {
       this.isNavigationOpen = false;
     },
     isNavigationOpen: function (isNavigationOpen) {
-      this.$root.$emit('change:isNavigationOpen', isNavigationOpen);
+      this.$root.$emit('change-is-navigation-open', isNavigationOpen);
     },
   },
   mounted() {
-    this.$root.$on('toggle:navigation', () => this.toggleIsOpen());
+    this.$root.$on('toggle-navigation', () => this.toggleIsOpen());
   },
   methods: {
     toggleIsOpen() {
@@ -124,6 +124,7 @@ svg {
 }
 
 .btn-link {
+  display: inline-block;
   width: 100%;
   text-align: left;
   text-decoration: none !important;
@@ -238,7 +239,8 @@ svg {
     transition: opacity $duration--fast-02 $exit-easing--productive;
   }
 
-  &.fade-enter,
+  &.fade-enter, // Remove this vue2 based only class when switching to vue3
+  &.fade-enter-from, // This is vue3 based only class modified from 'fade-enter'
   &.fade-leave-to {
     opacity: 0;
   }

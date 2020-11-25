@@ -4,8 +4,8 @@
     <b-row>
       <b-col sm="6" md="5" xl="4">
         <search
-          @changeSearch="onChangeSearchInput"
-          @clearSearch="onClearSearchInput"
+          @change-search="onChangeSearchInput"
+          @clear-search="onClearSearchInput"
         />
       </b-col>
       <b-col sm="6" md="3" xl="2">
@@ -35,9 +35,11 @@
           variant="link"
           data-test-id="hardwareStatus-button-expandProcessors"
           :aria-label="expandRowLabel"
+          :title="expandRowLabel"
+          class="btn-icon-only"
           @click="toggleRowDetails(row)"
         >
-          <icon-chevron :title="expandRowLabel" />
+          <icon-chevron />
         </b-button>
       </template>
       <!-- Health -->
@@ -166,7 +168,7 @@ export default {
   created() {
     this.$store.dispatch('processors/getProcessorsInfo').finally(() => {
       // Emit initial data fetch complete to parent component
-      this.$root.$emit('hardwareStatus::processors::complete');
+      this.$root.$emit('hardware-status-processors-complete');
     });
   },
   methods: {

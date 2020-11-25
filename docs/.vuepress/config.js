@@ -42,12 +42,13 @@ module.exports = {
               "/guide/guidelines/typography"
             ]
           },
+          "/guide/unit-testing/",
           {
             title: "Components",
             children: [
             "/guide/components/",
             "/guide/components/alert",
-            "/guide/components/button",
+            "/guide/components/buttons/",
             "/guide/components/table",
             "/guide/components/toast",
           ]
@@ -61,12 +62,5 @@ module.exports = {
         ],
         "/themes/": ["", "customize", "env"]
       },
-    },
-    configureWebpack: {
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, '../../src')
-        }
-      }
     }
   };

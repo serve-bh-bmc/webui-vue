@@ -14,9 +14,11 @@
           variant="link"
           data-test-id="hardwareStatus-button-expandBmc"
           :aria-label="expandRowLabel"
+          :title="expandRowLabel"
+          class="btn-icon-only"
           @click="toggleRowDetails(row)"
         >
-          <icon-chevron :title="expandRowLabel" />
+          <icon-chevron />
         </b-button>
       </template>
 
@@ -194,7 +196,7 @@ export default {
   created() {
     this.$store.dispatch('bmc/getBmcInfo').finally(() => {
       // Emit initial data fetch complete to parent component
-      this.$root.$emit('hardwareStatus::bmcManager::complete');
+      this.$root.$emit('hardware-status-bmc-manager-complete');
     });
   },
 };

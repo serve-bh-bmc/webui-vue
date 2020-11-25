@@ -14,9 +14,11 @@
           variant="link"
           data-test-id="hardwareStatus-button-expandChassis"
           :aria-label="expandRowLabel"
+          :title="expandRowLabel"
+          class="btn-icon-only"
           @click="toggleRowDetails(row)"
         >
-          <icon-chevron :title="expandRowLabel" />
+          <icon-chevron />
         </b-button>
       </template>
 
@@ -116,7 +118,7 @@ export default {
   created() {
     this.$store.dispatch('chassis/getChassisInfo').finally(() => {
       // Emit initial data fetch complete to parent component
-      this.$root.$emit('hardwareStatus::chassis::complete');
+      this.$root.$emit('hardware-status-chassis-complete');
     });
   },
 };

@@ -1,17 +1,15 @@
-
 // VuePress Theme overrides
-// Needed for table component to render correctly.
+// Change content to be left aligned
+.theme-default-content:not(.custom),
+.page-nav
+  max-width 72ch
+  margin 0
+  padding 2rem
 
-tr:nth-child(2n)
-  background-color transparent
-table
-  border-collapse collapse
-  z-index 0 !important
-  width 100%
-  display table
-th
-  border-right transparent
-  border-left transparent
-  text-align left
-td
-  border none
+// Overide default margins for p tags
+// VuePress is nesting li content in p tags
+// unless they are nested li elements creating
+// inconsistent margins between different lists
+li p
+    margin-bottom .5rem
+    margin-top .5rem
