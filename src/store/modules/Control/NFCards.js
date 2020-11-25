@@ -56,7 +56,7 @@ const NFCards = {
         root_url + "nf_blade_" + name + "/Actions/ComputerSystem.Reset";
       let payload = obj.payload;
       return await api
-        .patch(target_url, {
+        .post(target_url, {
           // "BladeId": name,
           ResetType: payload,
         })
