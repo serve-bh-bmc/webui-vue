@@ -136,7 +136,7 @@
     "sensors": "Sensors",
     "serialOverLan": "Serial over LAN (SOL) console",
     "serverLed": "Server LED",
-    "nfcards": "NFCards",
+    "nfcards": "NF Cards",
     "serverPowerOperations": "Server power operations",
     "snmpSettings": "SNMP settings",
     "sslCertificates": "SSL certificates",
@@ -577,13 +577,13 @@
     }
   },
   "pageNFCard": {
-    "nfcardSubTitle": "NFCard value",
-    "nfcardTitle": "NFCard control",
+    "nfcardSubTitle": "NF Card value",
+    "nfcardTitle": "NF Card control",
     "toast": {
-      "errorNFCardOff": "Error turning NFCard off.",
-      "errorNFCardOn": "Error turning NFCard on.",
-      "successNFCardOff": "NFCard successfully turned off.",
-      "successNFCardOn": "NFCard successfully turned on."
+      "errorNFCardOff": "Error turning NF Card off.",
+      "errorNFCardOn": "Error turning NF Card on.",
+      "successNFCardOff": "NF Card successfully turned off.",
+      "successNFCardOn": "NF Card successfully turned on."
     }
   },
   "pageServerPowerOperations": {
