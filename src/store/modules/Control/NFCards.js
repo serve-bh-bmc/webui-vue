@@ -56,8 +56,8 @@ const NFCards = {
       let payload = obj.payload;
       return await api
         .patch(target_url, {
-          BladeId: name,
-          RegisterValue: payload,
+          // "BladeId": name,
+          ResetType: payload,
         })
         .then(() => {
           commit("setNFCardValue", name, payload);
