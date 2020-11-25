@@ -49,7 +49,11 @@ export default {
     this.hideLoader();
     next();
   },
-  data() {},
+  data() {
+    return {
+      NFCardsPage: "NFCardsPage",
+    };
+  },
   computed: {
     nfcards: {
       get() {

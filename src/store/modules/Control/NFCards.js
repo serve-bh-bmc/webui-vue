@@ -40,13 +40,14 @@ const NFCards = {
   },
   actions: {
     async getNFCards({ commit }) {
-      var root_url = "/redfish/v1/Systems/";
-      return await api
-        .get("/redfish/v1/Systems/")
-        .then((response) => {
-          commit("setNFCardsValue", response.data.nfcards);
-        })
-        .catch((error) => console.log(error));
+      // var root_url = "/redfish/v1/Systems/";
+      // return await api
+      //   .get("/redfish/v1/Systems/")
+      //   .then((response) => {
+      //     commit("setNFCardsValue", response.data.nfcards);
+      //   })
+      //   .catch((error) => console.log(error));
+      return this.nfcards;
     },
     async saveNFCardValue({ commit }, obj) {
       let root_url = "/redfish/v1/Systems/";
@@ -56,8 +57,8 @@ const NFCards = {
       let payload = obj.payload;
       return await api
         .patch(target_url, {
-          BladeId: name,
-          RegisterValue: payload,
+          // "BladeId": name,
+          ResetType: payload,
         })
         .then(() => {
           commit("setNFCardValue", name, payload);
