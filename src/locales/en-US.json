@@ -111,6 +111,7 @@
     "sensors": "@:appPageTitle.sensors",
     "serialOverLan": "SOL console",
     "serverLed": "@:appPageTitle.serverLed",
+    "nfcards": "@:appPageTitle.nfcards",
     "serverPowerOperations": "@:appPageTitle.serverPowerOperations",
     "snmpSettings": "@:appPageTitle.snmpSettings",
     "sslCertificates": "@:appPageTitle.sslCertificates",
@@ -135,6 +136,7 @@
     "sensors": "Sensors",
     "serialOverLan": "Serial over LAN (SOL) console",
     "serverLed": "Server LED",
+    "nfcards": "NF Cards",
     "serverPowerOperations": "Server power operations",
     "snmpSettings": "SNMP settings",
     "sslCertificates": "SSL certificates",
@@ -572,6 +574,16 @@
       "errorServerLedOn": "Error turning LED on.",
       "successServerLedOff": "Server LED successfully turned off.",
       "successServerLedOn": "Server LED successfully turned on."
+    }
+  },
+  "pageNFCard": {
+    "nfcardSubTitle": "NF Card value",
+    "nfcardTitle": "NF Card control",
+    "toast": {
+      "errorNFCardOff": "Error turning NF Card off.",
+      "errorNFCardOn": "Error turning NF Card on.",
+      "successNFCardOff": "NF Card successfully turned off.",
+      "successNFCardOn": "NF Card successfully turned on."
     }
   },
   "pageServerPowerOperations": {

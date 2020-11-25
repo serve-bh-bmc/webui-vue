@@ -15,10 +15,10 @@
               @change="changeLedValue"
             >
               <span v-if="indicatorLed && indicatorLed !== 'Off'">
-                {{ $t('global.status.on') }}
+                {{ $t("global.status.on") }}
               </span>
               <span v-else>
-                {{ $t('global.status.off') }}
+                {{ $t("global.status.off") }}
               </span>
             </b-form-checkbox>
           </b-form-group>
@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import PageTitle from '@/components/Global/PageTitle';
-import PageSection from '@/components/Global/PageSection';
-import BVToastMixin from '@/components/Mixins/BVToastMixin';
-import LoadingBarMixin from '@/components/Mixins/LoadingBarMixin';
+import PageTitle from "@/components/Global/PageTitle";
+import PageSection from "@/components/Global/PageSection";
+import BVToastMixin from "@/components/Mixins/BVToastMixin";
+import LoadingBarMixin from "@/components/Mixins/LoadingBarMixin";
 
 export default {
-  name: 'ServerLed',
+  name: "ServerLed",
   components: { PageTitle, PageSection },
   mixins: [LoadingBarMixin, BVToastMixin],
   beforeRouteLeave(to, from, next) {
@@ -45,7 +45,7 @@ export default {
   computed: {
     indicatorLed: {
       get() {
-        return this.$store.getters['serverLed/getIndicatorValue'];
+        return this.$store.getters["serverLed/getIndicatorValue"];
       },
       set(newValue) {
         return newValue;
@@ -55,20 +55,21 @@ export default {
   created() {
     this.startLoader();
     this.$store
-      .dispatch('serverLed/getIndicatorValue')
+      .dispatch("serverLed/getIndicatorValue")
       .finally(() => this.endLoader());
   },
   methods: {
     changeLedValue(indicatorLed) {
+      console.log(indicatorLed);
       this.$store
-        .dispatch('serverLed/saveIndicatorLedValue', indicatorLed)
+        .dispatch("serverLed/saveIndicatorLedValue", indicatorLed)
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
           this.errorToast(message);
-          if (indicatorLed === 'Off') {
-            this.indicatorLed === 'Lit';
+          if (indicatorLed === "Off") {
+            this.indicatorLed === "Lit";
           } else {
-            this.indicatorLed === 'Off';
+            this.indicatorLed === "Off";
           }
         });
     },

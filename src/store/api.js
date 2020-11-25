@@ -5,7 +5,7 @@ import Axios from 'axios';
 import store from '../store';
 
 const api = Axios.create({
-  withCredentials: true,
+  withCredentials: true,  // use cookies to sent request
 });
 
 api.interceptors.response.use(undefined, (error) => {
