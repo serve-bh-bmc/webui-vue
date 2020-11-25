@@ -27,8 +27,8 @@ const NFCards = {
     getNFCards: (state) => state.nfcards,
   },
   mutations: {
-    setNFCardValue(state, name, newValue) {
-      this.state.nfcards[name] = newValue;
+    setNFCardValue(state, index, newValue) {
+      this.state.nfcards[index] = newValue;
     },
   },
   actions: {
@@ -44,18 +44,18 @@ const NFCards = {
     },
     async saveNFCardValue({ commit }, obj) {
       let root_url = "/redfish/v1/Systems/";
-      let name = obj.name;
+      let index = obj.index;
       let target_url =
-        root_url + "nf_blade_" + name + "/Actions/ComputerSystem.Reset";
+        root_url + "nf_blade_" + index + "/Actions/ComputerSystem.Reset";
       let payload = obj.payload;
       return await api
         .post(target_url, {
-          // "BladeId": name,
+          // "BladeId": index,
           ResetType: payload,
         })
         .then(() => {
-          commit("setNFCardValue", name, payload);
-          console.log(this.state.nfcards[name]);
+          commit("setNFCardValue", index, payload);
+          console.log(this.state.nfcards[index]);
           if (payload === "On") {
             return i18n.t("pageNFCards.toast.successNFCardOn");
           } else {

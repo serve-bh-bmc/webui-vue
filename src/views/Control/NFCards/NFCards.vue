@@ -1,17 +1,11 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <b-row>
+    <b-row v-for="(nfcard, index) in this.nfcards" :key="index">
       <!-- <h2>{{ register.name }}</h2> -->
       <b-col md="12">
-        <page-section :section-title="testRegisterTitle">
-          <b-form-group
-            v-for="(nfcard, index) in nfcards"
-            :key="'Card index: ' + index"
-            :label="'Card Index: ' + index"
-            label-cols-sm="4"
-            label-cols-lg="3"
-          >
+        <page-section :section-title="'NF Cards ' + index">
+          <b-form-group>
             <b-form-checkbox
               v-model="nfcards[index]"
               data-test-id="nfcard-checkbox-swithRegisterValue"
@@ -77,25 +71,25 @@ export default {
     this.$store.dispatch("nfcards/getNFCards").finally(() => this.endLoader());
   },
   methods: {
-    changeRegisterValue(name, oldNFCardValue) {
-      console.log(this.nfcards[name]);
+    changeRegisterValue(index, oldNFCardValue) {
       var newNFCardValue = "On";
       if (oldNFCardValue === "On") {
         newNFCardValue = "Off";
       }
+      this.nfcards.splice(index, 1, newNFCardValue);
+      console.log(this.nfcards[index]);
       var obj = {};
-      obj.name = name;
+      obj.index = index;
       obj.payload = newNFCardValue;
       this.$store
         .dispatch("nfcards/saveNFCardValue", obj)
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
-          console.log(this.nfcards[name]);
           this.errorToast(message);
           if (oldNFCardValue === "Off") {
-            this.nfcards[name] === "On";
+            this.nfcards[index] === "On";
           } else {
-            this.nfcards[name] === "Off";
+            this.nfcards[index] === "Off";
           }
         });
     },
