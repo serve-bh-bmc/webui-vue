@@ -6,22 +6,22 @@
       <b-col md="12">
         <page-section :section-title="testRegisterTitle">
           <b-form-group
-            v-for="nfcard in nfcards"
-            :key="nfcard.name"
-            :label="nfcard.name"
+            v-for="(nfcard, index) in nfcards"
+            :key="'Card index: ' + index"
+            :label="'Card Index: ' + index"
             label-cols-sm="4"
             label-cols-lg="3"
           >
             <b-form-checkbox
-              v-model="nfcard.value"
+              v-model="nfcards[index]"
               data-test-id="nfcard-checkbox-swithRegisterValue"
               name="check-button"
               value="On"
               unchecked-value="Off"
               switch
-              @change="changeRegisterValue(nfcard.name, nfcard.value)"
+              @change="changeRegisterValue(index, nfcards[index])"
             >
-              <span v-if="nfcard.name && nfcard.value !== 'Off'">
+              <span v-if="nfcards[index] === 'On'">
                 {{ $t("global.status.on") }}
               </span>
               <span v-else>
@@ -78,6 +78,7 @@ export default {
   },
   methods: {
     changeRegisterValue(name, oldNFCardValue) {
+      console.log(this.nfcards[name]);
       var newNFCardValue = "On";
       if (oldNFCardValue === "On") {
         newNFCardValue = "Off";
@@ -89,7 +90,13 @@ export default {
         .dispatch("nfcards/saveNFCardValue", obj)
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
+          console.log(this.nfcards[name]);
           this.errorToast(message);
+          if (oldNFCardValue === "Off") {
+            this.nfcards[name] === "On";
+          } else {
+            this.nfcards[name] === "Off";
+          }
         });
     },
   },
