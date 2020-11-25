@@ -5,22 +5,22 @@ const NFCards = {
   namespaced: true,
   state: {
     nfcards: [
-      { name: "A0", value: "Off" },
-      { name: "A1", value: "Off" },
-      { name: "A2", value: "Off" },
-      { name: "A3", value: "Off" },
-      { name: "A4", value: "Off" },
-      { name: "A5", value: "Off" },
-      { name: "A6", value: "Off" },
-      { name: "A7", value: "Off" },
-      { name: "A8", value: "Off" },
-      { name: "A9", value: "Off" },
-      { name: "A10", value: "Off" },
-      { name: "A11", value: "Off" },
-      { name: "A12", value: "Off" },
-      { name: "A13", value: "Off" },
-      { name: "A14", value: "Off" },
-      { name: "A15", value: "Off" },
+      { name: "0", value: "Off" },
+      { name: "1", value: "Off" },
+      { name: "2", value: "Off" },
+      { name: "3", value: "Off" },
+      { name: "4", value: "Off" },
+      { name: "5", value: "Off" },
+      { name: "6", value: "Off" },
+      { name: "7", value: "Off" },
+      { name: "8", value: "Off" },
+      { name: "9", value: "Off" },
+      { name: "10", value: "Off" },
+      { name: "11", value: "Off" },
+      { name: "12", value: "Off" },
+      { name: "13", value: "Off" },
+      { name: "14", value: "Off" },
+      { name: "15", value: "Off" },
     ],
   },
   getters: {
@@ -52,7 +52,7 @@ const NFCards = {
       var payload = obj.payload;
       return await api
         .patch("/redfish/v1/Systems/system", {
-          Name: name,
+          BladeId: name,
           RegisterValue: payload,
         })
         .then(() => {
