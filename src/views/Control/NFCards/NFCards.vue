@@ -1,27 +1,21 @@
 <template>
   <b-container fluid="xl">
     <page-title />
-    <b-row>
+    <b-row v-for="(nfcard, index) in this.nfcards" :key="index">
       <!-- <h2>{{ register.name }}</h2> -->
       <b-col md="12">
-        <page-section :section-title="testRegisterTitle">
-          <b-form-group
-            v-for="nfcard in nfcards"
-            :key="nfcard.name"
-            :label="nfcard.name"
-            label-cols-sm="4"
-            label-cols-lg="3"
-          >
+        <page-section :section-title="'NF Cards ' + index">
+          <b-form-group>
             <b-form-checkbox
-              v-model="nfcard.value"
+              v-model="nfcards[index]"
               data-test-id="nfcard-checkbox-swithRegisterValue"
               name="check-button"
               value="On"
               unchecked-value="Off"
               switch
-              @change="changeRegisterValue(nfcard.name, nfcard.value)"
+              @change="changeRegisterValue(index, nfcards[index])"
             >
-              <span v-if="nfcard.name && nfcard.value !== 'Off'">
+              <span v-if="nfcards[index] === 'On'">
                 {{ $t("global.status.on") }}
               </span>
               <span v-else>
@@ -49,7 +43,11 @@ export default {
     this.hideLoader();
     next();
   },
-  data() {},
+  data() {
+    return {
+      NFCardsPage: "NFCardsPage",
+    };
+  },
   computed: {
     nfcards: {
       get() {
@@ -73,19 +71,26 @@ export default {
     this.$store.dispatch("nfcards/getNFCards").finally(() => this.endLoader());
   },
   methods: {
-    changeRegisterValue(name, oldNFCardValue) {
+    changeRegisterValue(index, oldNFCardValue) {
       var newNFCardValue = "On";
       if (oldNFCardValue === "On") {
         newNFCardValue = "Off";
       }
+      this.nfcards.splice(index, 1, newNFCardValue);
+      console.log(this.nfcards[index]);
       var obj = {};
-      obj.name = name;
+      obj.index = index;
       obj.payload = newNFCardValue;
       this.$store
         .dispatch("nfcards/saveNFCardValue", obj)
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
           this.errorToast(message);
+          if (oldNFCardValue === "Off") {
+            this.nfcards[index] === "On";
+          } else {
+            this.nfcards[index] === "Off";
+          }
         });
     },
   },
