@@ -34,40 +34,40 @@
             <b-col sm="6" xl="4">
               <dl>
                 <!-- Asset tag -->
-                <dt>{{ $t('pageHardwareStatus.table.assetTag') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.assetTag") }}:</dt>
                 <dd>{{ tableFormatter(item.assetTag) }}</dd>
                 <br />
                 <!-- Description -->
-                <dt>{{ $t('pageHardwareStatus.table.description') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.description") }}:</dt>
                 <dd>{{ tableFormatter(item.description) }}</dd>
                 <br />
                 <!-- Indicator LED -->
-                <dt>{{ $t('pageHardwareStatus.table.indicatorLed') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.indicatorLed") }}:</dt>
                 <dd>{{ tableFormatter(item.indicatorLed) }}</dd>
                 <br />
                 <!-- Model -->
-                <dt>{{ $t('pageHardwareStatus.table.model') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.model") }}:</dt>
                 <dd>{{ tableFormatter(item.model) }}</dd>
               </dl>
             </b-col>
             <b-col sm="6" xl="4">
               <dl>
                 <!-- Power state -->
-                <dt>{{ $t('pageHardwareStatus.table.powerState') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.powerState") }}:</dt>
                 <dd>{{ tableFormatter(item.powerState) }}</dd>
                 <br />
                 <!-- Health rollup -->
                 <dt>
-                  {{ $t('pageHardwareStatus.table.statusHealthRollup') }}:
+                  {{ $t("pageHardwareStatus.table.statusHealthRollup") }}:
                 </dt>
                 <dd>{{ tableFormatter(item.healthRollup) }}</dd>
                 <br />
                 <!-- Status state -->
-                <dt>{{ $t('pageHardwareStatus.table.statusState') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.statusState") }}:</dt>
                 <dd>{{ tableFormatter(item.statusState) }}</dd>
                 <br />
                 <!-- System type -->
-                <dt>{{ $t('pageHardwareStatus.table.systemType') }}:</dt>
+                <dt>{{ $t("pageHardwareStatus.table.systemType") }}:</dt>
                 <dd>{{ tableFormatter(item.systemType) }}</dd>
               </dl>
             </b-col>
@@ -79,13 +79,13 @@
 </template>
 
 <script>
-import PageSection from '@/components/Global/PageSection';
-import IconChevron from '@carbon/icons-vue/es/chevron--down/20';
+import PageSection from "@/components/Global/PageSection";
+import IconChevron from "@carbon/icons-vue/es/chevron--down/20";
 
-import StatusIcon from '@/components/Global/StatusIcon';
+import StatusIcon from "@/components/Global/StatusIcon";
 
-import TableRowExpandMixin from '@/components/Mixins/TableRowExpandMixin';
-import TableDataFormatterMixin from '@/components/Mixins/TableDataFormatterMixin';
+import TableRowExpandMixin from "@/components/Mixins/TableRowExpandMixin";
+import TableDataFormatterMixin from "@/components/Mixins/TableDataFormatterMixin";
 
 export default {
   components: { IconChevron, PageSection, StatusIcon },
@@ -94,29 +94,29 @@ export default {
     return {
       fields: [
         {
-          key: 'expandRow',
-          label: '',
-          tdClass: 'table-row-expand',
+          key: "expandRow",
+          label: "",
+          tdClass: "table-row-expand",
         },
         {
-          key: 'id',
-          label: this.$t('pageHardwareStatus.table.id'),
+          key: "id",
+          label: this.$t("pageHardwareStatus.table.id"),
           formatter: this.tableFormatter,
         },
         {
-          key: 'health',
-          label: this.$t('pageHardwareStatus.table.health'),
+          key: "health",
+          label: this.$t("pageHardwareStatus.table.health"),
           formatter: this.tableFormatter,
-          tdClass: 'text-nowrap',
+          tdClass: "text-nowrap",
         },
         {
-          key: 'partNumber',
-          label: this.$t('pageHardwareStatus.table.partNumber'),
+          key: "partNumber",
+          label: this.$t("pageHardwareStatus.table.partNumber"),
           formatter: this.tableFormatter,
         },
         {
-          key: 'serialNumber',
-          label: this.$t('pageHardwareStatus.table.serialNumber'),
+          key: "serialNumber",
+          label: this.$t("pageHardwareStatus.table.serialNumber"),
           formatter: this.tableFormatter,
         },
       ],
@@ -124,13 +124,13 @@ export default {
   },
   computed: {
     systems() {
-      return this.$store.getters['system/systems'];
+      return this.$store.getters["system/systems"];
     },
   },
   created() {
-    this.$store.dispatch('system/getSystem').finally(() => {
+    this.$store.dispatch("system/getSystems").finally(() => {
       // Emit initial data fetch complete to parent component
-      this.$root.$emit('hardware-status-system-complete');
+      this.$root.$emit("hardware-status-system-complete");
     });
   },
 };

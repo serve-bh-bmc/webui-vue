@@ -4,7 +4,7 @@
     <b-row v-for="(nfcard, index) in this.nfcards" :key="index">
       <!-- <h2>{{ register.name }}</h2> -->
       <b-col md="12">
-        <page-section :section-title="'NF Cards ' + index">
+        <page-section :section-title="nfcard['name']">
           <b-form-group>
             <b-form-checkbox
               v-model="nfcards[index]"
@@ -13,9 +13,9 @@
               value="On"
               unchecked-value="Off"
               switch
-              @change="changeRegisterValue(index, nfcards[index])"
+              @change="changeRegisterValue(index, nfcards[index]['ps'])"
             >
-              <span v-if="nfcards[index] === 'On'">
+              <span v-if="nfcards[index]['ps'] === 'On'">
                 {{ $t("global.status.on") }}
               </span>
               <span v-else>
@@ -57,14 +57,6 @@ export default {
         return newNFCards;
       },
     },
-    // indicatorLed: {
-    //   get() {
-    //     return this.$store.getters['serverLed/getIndicatorValue'];
-    //   },
-    //   set(newValue) {
-    //     return newValue;
-    //   },
-    // },
   },
   created() {
     this.startLoader();
@@ -74,9 +66,10 @@ export default {
     changeRegisterValue(index, oldNFCardValue) {
       var newNFCardValue = "On";
       if (oldNFCardValue === "On") {
-        newNFCardValue = "Off";
+        newNFCardValue = "ForceOff";
       }
-      this.nfcards.splice(index, 1, newNFCardValue);
+      let temp = { name: this.nfcards[index]["name"], ps: newNFCardValue };
+      this.nfcards.splice(index, 1, temp);
       console.log(this.nfcards[index]);
       var obj = {};
       obj.index = index;
@@ -86,10 +79,10 @@ export default {
         .then((message) => this.successToast(message))
         .catch(({ message }) => {
           this.errorToast(message);
-          if (oldNFCardValue === "Off") {
-            this.nfcards[index] === "On";
+          if (oldNFCardValue === "ForceOff") {
+            this.nfcards[index]["ps"] === "On";
           } else {
-            this.nfcards[index] === "Off";
+            this.nfcards[index]["ps"] === "ForceOff";
           }
         });
     },

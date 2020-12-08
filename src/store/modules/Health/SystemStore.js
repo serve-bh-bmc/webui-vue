@@ -1,4 +1,4 @@
-import api from '@/store/api';
+import api from "@/store/api";
 
 const SystemStore = {
   namespaced: true,
@@ -11,29 +11,45 @@ const SystemStore = {
   mutations: {
     setSystemInfo: (state, data) => {
       const system = {};
-      system.assetTag = data.AssetTag;
+      // system.assetTag = data.AssetTag;
       system.description = data.Description;
-      system.firmwareVersion = data.BiosVersion;
+      // system.firmwareVersion = data.BiosVersion;
       system.health = data.Status.Health;
       system.id = data.Id;
-      system.indicatorLed = data.IndicatorLED;
-      system.manufacturer = data.Manufacturer;
-      system.model = data.Model;
-      system.partNumber = data.PartNumber;
+      // system.indicatorLed = data.IndicatorLED;
+      // system.manufacturer = data.Manufacturer;
+      // system.model = data.Model;
+      // system.partNumber = data.PartNumber;
       system.powerState = data.PowerState;
-      system.serialNumber = data.SerialNumber;
-      system.healthRollup = data.Status.HealthRollup;
+      // system.serialNumber = data.SerialNumber;
+      // system.healthRollup = data.Status.HealthRollup;
       system.statusState = data.Status.State;
       system.systemType = data.SystemType;
-      state.systems = [system];
+      state.systems.push(system);
+    },
+    resetSystems: (state) => {
+      state.systems = [];
     },
   },
   actions: {
-    async getSystem({ commit }) {
+    async getSystem({ commit }, nf_blade) {
+      let target_url = "/" + nf_blade;
       return await api
-        .get('/redfish/v1/Systems/system')
-        .then(({ data }) => commit('setSystemInfo', data))
+        .get(target_url)
+        .then(({ data }) => commit("setSystemInfo", data))
         .catch((error) => console.log(error));
+    },
+    async getSystems({ commit }, systemId) {
+      commit("resetSystems"); // reset systems to avoid bad value
+      let nf_blades = await api
+        .get("/redfish/v1/Systems")
+        .then(({ data }) => data.Members)
+        .catch((error) => console.log(error));
+      console.log(nf_blades); // check if nf_blades can be get correctly
+      for (var i = 0; i < nf_blades.length; i++) {
+        this.getSystem(nf_blades[i]["@odata.id"]);
+      }
+      return this.state.systems;
     },
   },
 };
