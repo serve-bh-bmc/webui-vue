@@ -32,13 +32,13 @@ const SystemStore = {
     },
   },
   actions: {
-    async getSystem({ commit }, nf_blade) {
-      let target_url = "/" + nf_blade;
-      return await api
-        .get(target_url)
-        .then(({ data }) => commit("setSystemInfo", data))
-        .catch((error) => console.log(error));
-    },
+    // async getSystem({ commit }, nf_blade) {
+    //   let target_url = "/" + nf_blade;
+    //   return await api
+    //     .get(target_url)
+    //     .then(({ data }) => commit("setSystemInfo", data))
+    //     .catch((error) => console.log(error));
+    // },
     async getSystems({ commit }, systemId) {
       commit("resetSystems"); // reset systems to avoid bad value
       let nf_blades = await api
@@ -47,8 +47,14 @@ const SystemStore = {
         .catch((error) => console.log(error));
       console.log(nf_blades); // check if nf_blades can be get correctly
       for (var i = 0; i < nf_blades.length; i++) {
-        this.getSystem(nf_blades[i]["@odata.id"]);
+        let n = "/" + nf_blades[i]["@odata.id"];
+        console.log(n);
+        await api
+          .get(n)
+          .then(({ data }) => commit("setSystemInfo", data))
+          .catch((error) => console.log(error));
       }
+      console.log(this.state.systems);
       return this.state.systems;
     },
   },
