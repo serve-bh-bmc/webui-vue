@@ -41,21 +41,27 @@ const SystemStore = {
     // },
     async getSystems({ commit }, systemId) {
       commit("resetSystems"); // reset systems to avoid bad value
-      let nf_blades = await api
+      return await api
         .get("/redfish/v1/Systems")
-        .then(({ data }) => data.Members)
+        .then(({ data: { Members = [] } }) =>
+          Members.map((member) => api.get("/" + member["@odata.id"]))
+        )
+        .then((promises) => api.all(promises))
+        .then((response) => {
+          const data = response.map(({ data }) => data);
+          commit("setSystemInfo", data);
+        })
         .catch((error) => console.log(error));
-      console.log(nf_blades); // check if nf_blades can be get correctly
-      for (var i = 0; i < nf_blades.length; i++) {
-        let n = "/" + nf_blades[i]["@odata.id"];
-        console.log(n);
-        await api
-          .get(n)
-          .then(({ data }) => commit("setSystemInfo", data))
-          .catch((error) => console.log(error));
-      }
-      console.log(this.state.systems);
-      return this.state.systems;
+      // for (var i = 0; i < nf_blades.length; i++) {
+      //   let n = "/" + nf_blades[i]["@odata.id"];
+      //   console.log(n);
+      //   await api
+      //     .get(n)
+      //     .then(({ data }) => commit("setSystemInfo", data))
+      //     .catch((error) => console.log(error));
+      // }
+      // console.log(this.state.systems);
+      // return this.state.systems;
     },
   },
 };
