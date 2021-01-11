@@ -147,6 +147,7 @@ export default {
           formatter: this.tableFormatter,
         },
       ],
+      timer: null,
     };
   },
   computed: {
@@ -158,10 +159,16 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("nfcards/getNFCards");
-    this.$store.dispatch("system/getSystems").finally(() => {
-      this.$root.$emit("hardware-status-system-complete");
-    });
+    this.timer = setInterval(() => {
+      this.$store.dispatch("nfcards/getNFCards");
+      this.$store.dispatch("system/getSystems").finally(() => {
+        this.$root.$emit("hardware-status-system-complete");
+      });
+    }, 10000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
     changeResetType(nf_name, nf_type) {

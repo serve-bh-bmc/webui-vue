@@ -22,10 +22,10 @@ const SystemStore = {
       system.id = data.Id;
       system.name = data.Name;
       system.powerState = data.PowerState;
-      system.statusState = data.Status.State;
       system.systemType = data.SystemType;
       system.description = data.Description;
       system.health = data.Status.Health;
+      system.statusState = data.Status.State;
       state.systems.push(system);
     },
     resetSystems: (state) => {
@@ -50,7 +50,8 @@ const SystemStore = {
         .then((promises) => api.all(promises))
         .then((response) => {
           const data = response.map(({ data }) => data);
-          commit("setSystemInfo", data);
+          console.log(data);
+          commit("setSystemInfo", data[0]);
         })
         .catch((error) => console.log(error));
       // for (var i = 0; i < nf_blades.length; i++) {
