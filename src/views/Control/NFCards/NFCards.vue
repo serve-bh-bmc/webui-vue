@@ -15,6 +15,9 @@
               switch
               @change="changeRegisterValue(index, nfcards[index]['ps'])"
             >
+              <span>
+                {{ nfcard[["name"]] }}
+              </span>
               <span v-if="nfcards[index]['ps'] === 'On'">
                 {{ $t("global.status.on") }}
               </span>

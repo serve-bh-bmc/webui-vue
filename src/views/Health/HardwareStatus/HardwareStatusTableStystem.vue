@@ -54,15 +54,20 @@
               <dl>
                 <!-- Power state -->
                 <dt>{{ $t("pageHardwareStatus.table.powerState") }}:</dt>
-                <dd>{{ tableFormatter(item.powerState) }}</dd>
-                <dd>
-                  <b-form-group>
+                <dd size="sm">{{ tableFormatter(item.powerState) }}</dd>
+                <br />
+                <dt>Switch:</dt>
+                <dd style="height: 10px">
+                  <b-form-group class="form-inline">
                     <b-form-checkbox
+                      v-model="item.powerState"
                       data-test-id="nfcard-checkbox-swithRegisterValue"
-                      name="check-button"
+                      name="switch-button"
                       value="On"
                       unchecked-value="Off"
                       switch
+                      size="sm"
+                      inline
                       @change="changeResetType(item.name, item.powerState)"
                     >
                       <span v-if="item.powerState === 'On'">
@@ -72,14 +77,18 @@
                         {{ $t("global.status.off") }}
                       </span>
                     </b-form-checkbox>
-                    <b-button
+                    <b-form-checkbox
                       v-if="item.powerState === 'On'"
+                      name="restart-button"
+                      value="On"
+                      unchecked-value="Off"
                       size="sm"
-                      pill
+                      switch
+                      inline
                       @click="changeResetType(item.name, 'restart')"
                     >
                       Restart
-                    </b-button>
+                    </b-form-checkbox>
                   </b-form-group>
                 </dd>
                 <br />
@@ -158,22 +167,23 @@ export default {
       return this.$store.getters["nfcards/getNFCards"];
     },
   },
-  created() {
-    this.timer = setInterval(() => {
+  watch: {
+    "this.$store.NFCards.nfcards": function () {
       this.$store.dispatch("nfcards/getNFCards");
-      this.$store.dispatch("system/getSystems").finally(() => {
-        this.$root.$emit("hardware-status-system-complete");
-      });
-    }, 10000);
+    },
   },
-  beforeDestroy() {
-    clearInterval(this.timer);
-    this.timer = null;
+  created() {
+    this.$store.dispatch("nfcards/getNFCards");
+    this.$store.dispatch("system/getSystems").finally(() => {
+      this.$root.$emit("hardware-status-system-complete");
+    });
   },
   methods: {
     changeResetType(nf_name, nf_type) {
       let newValue = "On";
       let i = 0;
+      let j = 0;
+      console.log(nf_name, nf_type);
       if (nf_type === "On") {
         newValue = "ForceOff";
       }
@@ -183,6 +193,12 @@ export default {
       for (i = 0; i < this.nfcards.length; i++) {
         if (this.nfcards[i]["name"] === nf_name) {
           this.nfcards[i]["ps"] === newValue;
+          break;
+        }
+      }
+      for (j = 0; j < this.systems.length; j++) {
+        if (this.systems[j]["name"] === nf_name) {
+          this.systems[j]["powerState"] === newValue;
           break;
         }
       }

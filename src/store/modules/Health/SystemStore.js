@@ -3,7 +3,17 @@ import api from "@/store/api";
 const SystemStore = {
   namespaced: true,
   state: {
-    systems: [],
+    systems: [
+      {
+        id: "nf_blade_9",
+        name: "nf_blade_9",
+        systemType: "123",
+        description: "test",
+        powerState: "On",
+        health: "OK",
+        statusState: "enabled",
+      },
+    ],
   },
   getters: {
     systems: (state) => state.systems,
@@ -33,15 +43,8 @@ const SystemStore = {
     },
   },
   actions: {
-    // async getSystem({ commit }, nf_blade) {
-    //   let target_url = "/" + nf_blade;
-    //   return await api
-    //     .get(target_url)
-    //     .then(({ data }) => commit("setSystemInfo", data))
-    //     .catch((error) => console.log(error));
-    // },
     async getSystems({ commit }) {
-      commit("resetSystems"); // reset systems to avoid bad value
+      // commit("resetSystems"); // reset systems to avoid bad value
       return await api
         .get("/redfish/v1/Systems")
         .then(({ data: { Members = [] } }) =>
@@ -54,16 +57,6 @@ const SystemStore = {
           commit("setSystemInfo", data[0]);
         })
         .catch((error) => console.log(error));
-      // for (var i = 0; i < nf_blades.length; i++) {
-      //   let n = "/" + nf_blades[i]["@odata.id"];
-      //   console.log(n);
-      //   await api
-      //     .get(n)
-      //     .then(({ data }) => commit("setSystemInfo", data))
-      //     .catch((error) => console.log(error));
-      // }
-      // console.log(this.state.systems);
-      // return this.state.systems;
     },
   },
 };

@@ -28,7 +28,7 @@ const NFCards = {
   },
   actions: {
     async getNFCards({ commit }) {
-      commit("resetNFs"); // clear nfcards array, avoid keep bad value
+      // commit("resetNFs"); // clear nfcards array, avoid keep bad value
       return await api
         .get("/redfish/v1/Systems")
         .then(({ data: { Members = [] } }) =>
