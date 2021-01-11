@@ -12,19 +12,20 @@ const SystemStore = {
     setSystemInfo: (state, data) => {
       const system = {};
       // system.assetTag = data.AssetTag;
-      system.description = data.Description;
-      // system.firmwareVersion = data.BiosVersion;
-      system.health = data.Status.Health;
-      system.id = data.Id;
       // system.indicatorLed = data.IndicatorLED;
       // system.manufacturer = data.Manufacturer;
       // system.model = data.Model;
       // system.partNumber = data.PartNumber;
-      system.powerState = data.PowerState;
       // system.serialNumber = data.SerialNumber;
       // system.healthRollup = data.Status.HealthRollup;
+      // system.firmwareVersion = data.BiosVersion;
+      system.id = data.Id;
+      system.name = data.Name;
+      system.powerState = data.PowerState;
       system.statusState = data.Status.State;
       system.systemType = data.SystemType;
+      system.description = data.Description;
+      system.health = data.Status.Health;
       state.systems.push(system);
     },
     resetSystems: (state) => {
@@ -39,7 +40,7 @@ const SystemStore = {
     //     .then(({ data }) => commit("setSystemInfo", data))
     //     .catch((error) => console.log(error));
     // },
-    async getSystems({ commit }, systemId) {
+    async getSystems({ commit }) {
       commit("resetSystems"); // reset systems to avoid bad value
       return await api
         .get("/redfish/v1/Systems")

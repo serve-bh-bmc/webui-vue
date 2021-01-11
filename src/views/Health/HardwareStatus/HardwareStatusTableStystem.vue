@@ -158,8 +158,7 @@ export default {
     },
   },
   created() {
-    this.startLoader();
-    this.$store.dispatch("nfcards/getNFCards").finally(() => this.endLoader());
+    this.$store.dispatch("nfcards/getNFCards");
     this.$store.dispatch("system/getSystems").finally(() => {
       this.$root.$emit("hardware-status-system-complete");
     });

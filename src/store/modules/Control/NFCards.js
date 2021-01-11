@@ -10,17 +10,17 @@ const NFCards = {
     getNFCards: (state) => state.nfcards,
   },
   mutations: {
-    setNFCardValue(state, data) {
+    setNFCardValue: (state, data) => {
       const nfcard = {};
       nfcard.name = data.name;
       nfcard.ps = data.PowerState;
-      for (var i = 0; i < this.state.nfcards.length; i++) {
-        if (this.state.nfcards[i].index == nfcard.index) {
+      for (var i = 0; i < state.nfcards.length; i++) {
+        if (state.nfcards[i].index == nfcard.index) {
           console.log("already exist");
           return;
         }
       }
-      this.state.nfcards.push(nfcard);
+      state.nfcards.push(nfcard);
     },
     resetNFs: (state) => {
       state.nfcards = [];
