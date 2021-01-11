@@ -11,8 +11,8 @@ const NFCards = {
   },
   mutations: {
     setNFCardValue(state, data) {
-      var nfcard = {};
-      nfcard.name = data.Id.toUpper();
+      const nfcard = {};
+      nfcard.name = data.name;
       nfcard.ps = data.PowerState;
       for (var i = 0; i < this.state.nfcards.length; i++) {
         if (this.state.nfcards[i].index == nfcard.index) {
@@ -22,45 +22,35 @@ const NFCards = {
       }
       this.state.nfcards.push(nfcard);
     },
-    resetNFs(state) {
-      this.state.nfcards = [];
+    resetNFs: (state) => {
+      state.nfcards = [];
     },
   },
   actions: {
-    async getNFCard({ commit }, target) {
-      let target_url = "/" + target;
-      console.log(target_url); // check if url is in correct format
-      return await api
-        .get(target_url)
-        .then(({ data }) => commit("setNFCardValue", data))
-        .catch((error) => console.log(error));
-    },
     async getNFCards({ commit }) {
       commit("resetNFs"); // clear nfcards array, avoid keep bad value
-      let nf_blades = [];
-      nf_blades = await api
+      return await api
         .get("/redfish/v1/Systems")
-        .then(({ data }) => data.Members)
+        .then(({ data: { Members = [] } }) =>
+          Members.map((member) => api.get("/" + member["@odata.id"]))
+        )
+        .then((promises) => api.all(promises))
+        .then((response) => {
+          const data = response.map(({ data }) => data);
+          commit("setNFCardValue", data);
+        })
         .catch((error) => console.log(error));
-      for (var i = 0; i < nf_blades.length; i++) {
-        this.getNFCard(nf_blades[i]["@odata.id"]);
-      }
-      return this.state.nfcards;
     },
     async saveNFCardValue({ commit }, obj) {
       let root_url = "/redfish/v1/Systems/";
-      let index = obj.index;
-      let target_url =
-        root_url + "nf_blade_" + index + "/Actions/ComputerSystem.Reset";
+      let name = obj.name;
+      let target_url = root_url + name + "/Actions/ComputerSystem.Reset";
       let payload = obj.payload;
       return await api
         .post(target_url, {
-          // "BladeId": index,
           ResetType: payload,
         })
         .then(() => {
-          commit("setNFCardValue", index, payload);
-          console.log(this.state.nfcards[index]);
           if (payload === "On") {
             return i18n.t("pageNFCards.toast.successNFCardOn");
           } else {

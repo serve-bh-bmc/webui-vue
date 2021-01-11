@@ -55,6 +55,33 @@
                 <!-- Power state -->
                 <dt>{{ $t("pageHardwareStatus.table.powerState") }}:</dt>
                 <dd>{{ tableFormatter(item.powerState) }}</dd>
+                <dd>
+                  <b-form-group>
+                    <b-form-checkbox
+                      data-test-id="nfcard-checkbox-swithRegisterValue"
+                      name="check-button"
+                      value="On"
+                      unchecked-value="Off"
+                      switch
+                      @change="changeResetType(item.name, item.powerState)"
+                    >
+                      <span v-if="item.powerState === 'On'">
+                        {{ $t("global.status.on") }}
+                      </span>
+                      <span v-else>
+                        {{ $t("global.status.off") }}
+                      </span>
+                    </b-form-checkbox>
+                    <b-button
+                      v-if="item.powerState === 'On'"
+                      size="sm"
+                      pill
+                      @click="changeResetType(item.name, 'restart')"
+                    >
+                      Restart
+                    </b-button>
+                  </b-form-group>
+                </dd>
                 <br />
                 <!-- Health rollup -->
                 <dt>
@@ -126,12 +153,43 @@ export default {
     systems() {
       return this.$store.getters["system/systems"];
     },
+    nfcards() {
+      return this.$store.getters["nfcards/getNFCards"];
+    },
   },
   created() {
+    this.startLoader();
+    this.$store.dispatch("nfcards/getNFCards").finally(() => this.endLoader());
     this.$store.dispatch("system/getSystems").finally(() => {
-      // Emit initial data fetch complete to parent component
       this.$root.$emit("hardware-status-system-complete");
     });
+  },
+  methods: {
+    changeResetType(nf_name, nf_type) {
+      let newValue = "On";
+      let i = 0;
+      if (nf_type === "On") {
+        newValue = "ForceOff";
+      }
+      if (nf_type === "restart") {
+        newValue = "ForceRestart";
+      }
+      for (i = 0; i < this.nfcards.length; i++) {
+        if (this.nfcards[i]["name"] === nf_name) {
+          this.nfcards[i]["ps"] === newValue;
+          break;
+        }
+      }
+      const obj = {};
+      obj.name = nf_name;
+      obj.payload = newValue;
+      this.$store
+        .dispatch("nfcards/saveNFCardValue", obj)
+        .then((message) => this.successToast(message))
+        .catch(({ message }) => {
+          this.errorToast(message);
+        });
+    },
   },
 };
 </script>

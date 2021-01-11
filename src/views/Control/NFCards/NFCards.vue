@@ -72,7 +72,7 @@ export default {
       this.nfcards.splice(index, 1, temp);
       console.log(this.nfcards[index]);
       var obj = {};
-      obj.index = index;
+      obj.name = this.nfcards[index]["name"];
       obj.payload = newNFCardValue;
       this.$store
         .dispatch("nfcards/saveNFCardValue", obj)
