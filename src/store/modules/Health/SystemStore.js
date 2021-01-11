@@ -1,4 +1,5 @@
 import api from "@/store/api";
+import _ from "lodash";
 
 const SystemStore = {
   namespaced: true,
@@ -44,7 +45,8 @@ const SystemStore = {
   },
   actions: {
     async getSystems({ commit }) {
-      // commit("resetSystems"); // reset systems to avoid bad value
+      commit("resetSystems"); // reset systems to avoid bad value
+      console.log("Runing");
       return await api
         .get("/redfish/v1/Systems")
         .then(({ data: { Members = [] } }) =>
