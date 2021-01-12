@@ -60,9 +60,6 @@ const SystemStore = {
         })
         .catch((error) => console.log(error));
     },
-    async systemsTimer({ commit }) {
-      this.getSystems();
-    },
   },
 };
 
