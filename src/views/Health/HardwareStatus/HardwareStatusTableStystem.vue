@@ -87,7 +87,7 @@
                       inline
                       @click="changeResetType(item.name, 'restart')"
                     >
-                      Restart
+                      Reset
                     </b-button>
                   </b-form-group>
                 </dd>
@@ -171,7 +171,7 @@ export default {
     },
   },
   mounted() {
-    this.timer = setInterval(this.updateSystems, 10000);
+    // this.timer = setInterval(this.updateSystems, 10000);
   },
   created() {
     this.$store.dispatch("nfcards/getNFCards");
@@ -179,10 +179,10 @@ export default {
       this.$root.$emit("hardware-status-system-complete");
     });
   },
-  beforeDestroy() {
-    clearInterval(this.timer);
-    this.timer = null;
-  },
+  // beforeDestroy() {
+  //   clearInterval(this.timer);
+  //   this.timer = null;
+  // },
   methods: {
     updateSystems: function () {
       console.log("update systems");
