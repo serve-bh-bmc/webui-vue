@@ -123,7 +123,6 @@ import StatusIcon from "@/components/Global/StatusIcon";
 import TableRowExpandMixin from "@/components/Mixins/TableRowExpandMixin";
 import TableDataFormatterMixin from "@/components/Mixins/TableDataFormatterMixin";
 import ConsoleLayoutVue from "../../../layouts/ConsoleLayout.vue";
-import axios from "axios";
 import Vue from "vue";
 
 export default {
@@ -188,26 +187,31 @@ export default {
       console.log("update systems");
       this.$store.dispatch("system/getSystems");
     },
+    reload: function () {},
     changeResetType(nf_name, nf_type) {
       let newValue = "On";
+      let newType = "On";
       let i = 0;
       let j = 0;
       console.log(nf_name, nf_type);
       if (nf_type === "On") {
         newValue = "ForceOff";
+        newType = "Off";
       }
       if (nf_type === "restart") {
         newValue = "ForceRestart";
+        newType = "On";
       }
       for (i = 0; i < this.nfcards.length; i++) {
         if (this.nfcards[i]["name"] === nf_name) {
-          Vue.set(this.nfcards, i, { name: nf_name, ps: newValue });
+          Vue.set(this.nfcards, i, { name: nf_name, ps: newType });
           break;
         }
       }
       for (j = 0; j < this.systems.length; j++) {
         if (this.systems[j]["name"] === nf_name) {
-          Vue.set(this.systems, j, { name: nf_name, ps: newValue });
+          this.systems[j]["ps"] = newType;
+          Vue.set(this.systems, j, this.systems[j]);
           break;
         }
       }
@@ -216,10 +220,14 @@ export default {
       obj.payload = newValue;
       this.$store
         .dispatch("nfcards/saveNFCardValue", obj)
-        .then((message) => console.log(message))
+        .then((message) => {
+          console.log(message);
+        })
         .catch(({ message }) => {
           console.log(message);
         });
+      console.log(this.systems);
+      this.$forceUpdate();
     },
   },
 };
