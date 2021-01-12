@@ -77,18 +77,18 @@
                         {{ $t("global.status.off") }}
                       </span>
                     </b-form-checkbox>
-                    <b-form-checkbox
+                    <b-button
                       v-if="item.powerState === 'On'"
                       name="restart-button"
-                      value="On"
-                      unchecked-value="Off"
                       size="sm"
+                      style="heigh: 10px"
                       switch
+                      pill
                       inline
                       @click="changeResetType(item.name, 'restart')"
                     >
                       Restart
-                    </b-form-checkbox>
+                    </b-button>
                   </b-form-group>
                 </dd>
                 <br />
@@ -122,6 +122,9 @@ import StatusIcon from "@/components/Global/StatusIcon";
 
 import TableRowExpandMixin from "@/components/Mixins/TableRowExpandMixin";
 import TableDataFormatterMixin from "@/components/Mixins/TableDataFormatterMixin";
+import ConsoleLayoutVue from "../../../layouts/ConsoleLayout.vue";
+import axios from "axios";
+import Vue from "vue";
 
 export default {
   components: { IconChevron, PageSection, StatusIcon },
@@ -167,10 +170,8 @@ export default {
       return this.$store.getters["nfcards/getNFCards"];
     },
   },
-  watch: {
-    "this.$store.NFCards.nfcards": function () {
-      this.$store.dispatch("nfcards/getNFCards");
-    },
+  mounted() {
+    this.timer = setInterval(this.updateSystems, 10000);
   },
   created() {
     this.$store.dispatch("nfcards/getNFCards");
@@ -178,7 +179,15 @@ export default {
       this.$root.$emit("hardware-status-system-complete");
     });
   },
+  beforeDestroy() {
+    clearInterval(this.timer);
+    this.timer = null;
+  },
   methods: {
+    updateSystems: function () {
+      console.log("update systems");
+      this.$store.dispatch("system/getSystems");
+    },
     changeResetType(nf_name, nf_type) {
       let newValue = "On";
       let i = 0;
@@ -192,13 +201,13 @@ export default {
       }
       for (i = 0; i < this.nfcards.length; i++) {
         if (this.nfcards[i]["name"] === nf_name) {
-          this.nfcards[i]["ps"] === newValue;
+          Vue.set(this.nfcards, i, { name: nf_name, ps: newValue });
           break;
         }
       }
       for (j = 0; j < this.systems.length; j++) {
         if (this.systems[j]["name"] === nf_name) {
-          this.systems[j]["powerState"] === newValue;
+          Vue.set(this.systems, j, { name: nf_name, ps: newValue });
           break;
         }
       }
@@ -207,9 +216,9 @@ export default {
       obj.payload = newValue;
       this.$store
         .dispatch("nfcards/saveNFCardValue", obj)
-        .then((message) => this.successToast(message))
+        .then((message) => console.log(message))
         .catch(({ message }) => {
-          this.errorToast(message);
+          console.log(message);
         });
     },
   },

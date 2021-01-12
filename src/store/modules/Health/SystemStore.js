@@ -10,7 +10,7 @@ const SystemStore = {
         name: "nf_blade_9",
         systemType: "123",
         description: "test",
-        powerState: "On",
+        powerState: "Off",
         health: "OK",
         statusState: "enabled",
       },
@@ -46,7 +46,7 @@ const SystemStore = {
   actions: {
     async getSystems({ commit }) {
       commit("resetSystems"); // reset systems to avoid bad value
-      console.log("Runing");
+      console.log("Running");
       return await api
         .get("/redfish/v1/Systems")
         .then(({ data: { Members = [] } }) =>
@@ -59,6 +59,9 @@ const SystemStore = {
           commit("setSystemInfo", data[0]);
         })
         .catch((error) => console.log(error));
+    },
+    async systemsTimer({ commit }) {
+      this.getSystems();
     },
   },
 };
